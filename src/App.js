@@ -1,6 +1,20 @@
 import React, { useState } from "react";
 import Column from "./column";
+import styled from "styled-components";
 import { DragDropContext } from "react-beautiful-dnd";
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  margin-right: 5px;
+`;
+
+const Form = styled.form`
+  margin-left: 10px;
+`;
 
 function App() {
   const initialColumns = {
@@ -51,6 +65,7 @@ function App() {
         },
       }));
       setTask("");
+      setIsEditing(false);
     }
   };
 
@@ -145,33 +160,30 @@ function App() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
+      <Form onSubmit={handleSubmit}>
+        <Input
           value={task}
           onChange={(e) => setTask(e.target.value)}
           type="text"
+          placeholder="Add a task"
         />
-        <input type="submit" />
-      </form>
+        <Input type="submit" value={isEditing ? "Edit Task" : "Add Task"} />
+      </Form>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div
+        <Container
           style={{
             display: "flex",
-            margin: "24px auto",
-            maxWidth: "128px",
-            flexDirection: "column",
-            justifyContent: "space-between",
           }}
         >
-          {Object.values(columns).map((col) => (
+          {Object.values(columns).map((col, index) => (
             <Column
               col={col}
-              key={col.id}
+              key={index}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
             />
           ))}
-        </div>
+        </Container>
       </DragDropContext>
     </>
   );
