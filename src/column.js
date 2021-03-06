@@ -3,7 +3,7 @@ import Item from "./item";
 
 import { Droppable } from "react-beautiful-dnd";
 
-const Column = ({ col: { list, id }, handleDelete }) => {
+const Column = ({ col: { list, id }, handleDelete, handleEdit }) => {
   return (
     <Droppable droppableId={id}>
       {(provided) => (
@@ -30,6 +30,7 @@ const Column = ({ col: { list, id }, handleDelete }) => {
                 text={text}
                 index={index}
                 handleDelete={handleDelete}
+                handleEdit={handleEdit}
               />
             ))}
             {provided.placeholder}
