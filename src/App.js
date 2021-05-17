@@ -12,6 +12,19 @@ const Input = styled.input`
   margin-right: 5px;
 `;
 
+const SubmitButton = styled.input`
+  padding: 10px;
+  margin-right: 5px;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  :hover {
+    background-color: #005bff;
+  }
+`;
+
 const Form = styled.form`
   margin-left: 10px;
 `;
@@ -83,9 +96,9 @@ function App() {
   };
 
   //modify
-  const handleEdit = (label, index, colName) => {
+  const handleEdit = (text, index, colName) => {
     setIsEditing(true);
-    setTask(label);
+    setTask(text);
     setId(index);
     setColName(colName);
   };
@@ -167,14 +180,13 @@ function App() {
           type="text"
           placeholder="Add a task"
         />
-        <Input type="submit" value={isEditing ? "Edit Task" : "Add Task"} />
+        <SubmitButton
+          type="submit"
+          value={isEditing ? "Edit Task" : "Add Task"}
+        />
       </Form>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Container
-          style={{
-            display: "flex",
-          }}
-        >
+        <Container>
           {Object.values(columns).map((col, index) => (
             <Column
               col={col}

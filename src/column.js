@@ -32,13 +32,7 @@ const Column = ({ col: { list, id }, handleDelete, handleEdit }) => {
       {(provided) => (
         <Container>
           <Title>{id}</Title>
-          <TaskList
-            style={{
-              minHeight: "120px",
-            }}
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-          >
+          <TaskList {...provided.droppableProps} ref={provided.innerRef}>
             {list.map((text, index) => (
               <Item
                 id={id}
